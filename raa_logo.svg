@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 559.7 240.79">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: #008cd9;
+      }
+
+      .cls-2 {
+        font-family: 'SegoeUIVariable_700.000wght_5.000opsz', 'Segoe UI Variable';
+        font-size: 146.01px;
+        font-variation-settings: 'wght' 700, 'opsz' 5;
+      }
+
+      .cls-3 {
+        font-family: SegoeUIVariable-BoldSmall, 'Segoe UI Variable';
+        font-size: 58.83px;
+        font-variation-settings: 'wght' 700, 'opsz' 8;
+        font-weight: 700;
+      }
+
+      .cls-4 {
+        fill: #febc27;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <path class="cls-1" d="M118.38,0H0v118.38c0,13.08,10.6,23.68,23.68,23.68h25.86c-1.4-3.79-2.14-7.8-2.18-11.84v-47.35c.02-19.61,15.91-35.49,35.51-35.51h47.35c4.04.04,8.05.78,11.84,2.18v-25.86c0-13.08-10.6-23.68-23.68-23.68Z"/>
+      <path class="cls-1" d="M95,223.01h118.38v-118.38c0-13.08-10.6-23.68-23.68-23.68h-25.86c1.4,3.79,2.14,7.8,2.18,11.84v47.35c-.02,19.61-15.91,35.49-35.51,35.51h-47.35c-4.04-.04-8.05-.78-11.84-2.18v25.86c0,13.08,10.6,23.68,23.68,23.68Z"/>
+      <path class="cls-4" d="M67.63,140.61c-.91-2.19-1.42-4.6-1.42-7.12v-62.47h69.84c3.2,0,6.08,1.35,8.11,3.52-39.44,1.82-71.57,30.02-76.52,66.06Z"/>
+      <path class="cls-1" d="M147.17,82.14v53.76c0,8.88-7.2,16.08-16.07,16.08h-46.4c-4.26,0-8.2-1.44-11.32-3.87,1.24-36.97,33.74-66.74,73.71-67.27.05.43.08.86.08,1.31Z"/>
+      <text class="cls-2" transform="translate(244.13 156.54)"><tspan x="0" y="0">RA</tspan><tspan x="211.05" y="0">A</tspan></text>
+      <text class="cls-3" transform="translate(257.25 222.95)"><tspan x="0" y="0">COMPANY</tspan></text>
+    </g>
+  </g>
+</svg>
