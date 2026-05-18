@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RAA Company</title>
-  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <title>شركة RAA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;800&family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
   <style>
     :root {
       --blue: #1a9bdb;
       --blue-dark: #0e6fa8;
-      --blue-deep: #0a2a4a;
       --gold: #f5a623;
       --bg: #050e1a;
       --bg2: #081525;
@@ -19,17 +18,21 @@
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Exo 2', sans-serif;
+      font-family: 'Cairo', sans-serif;
       overflow-x: hidden;
+      direction: rtl;
     }
 
-    /* ── CIRCUIT BACKGROUND ── */
+    body.en {
+      font-family: 'Exo 2', sans-serif;
+      direction: ltr;
+    }
+
     body::before {
       content: '';
       position: fixed;
@@ -42,6 +45,16 @@
       z-index: 0;
     }
 
+    /* Language switching */
+    [data-ar] { display: block; }
+    [data-en] { display: none; }
+    body.en [data-ar] { display: none; }
+    body.en [data-en] { display: block; }
+    span[data-ar] { display: inline; }
+    span[data-en] { display: none; }
+    body.en span[data-ar] { display: none; }
+    body.en span[data-en] { display: inline; }
+
     /* ── NAV ── */
     nav {
       position: fixed;
@@ -51,80 +64,51 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 60px;
-      background: rgba(5,14,26,0.85);
+      background: rgba(5,14,26,0.88);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid rgba(26,155,219,0.15);
     }
 
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .nav-logo { display: flex; align-items: center; gap: 14px; }
+    .nav-logo svg { height: 44px; width: auto; }
 
-    .nav-logo svg {
-      width: 48px; height: 48px;
-    }
-
-    .nav-logo-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1;
-    }
-
-    .nav-logo-text .brand {
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--blue);
-      letter-spacing: 2px;
-    }
-
-    .nav-logo-text .sub {
-      font-size: 0.65rem;
-      font-weight: 600;
-      letter-spacing: 4px;
-      color: var(--text-dim);
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: color 0.3s;
-    }
-
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 0.92rem; font-weight: 600; transition: color 0.3s; }
+    body.en .nav-links a { font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; }
     .nav-links a:hover { color: var(--blue); }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+
+    .lang-toggle {
+      background: rgba(26,155,219,0.1);
+      border: 1.5px solid rgba(26,155,219,0.35);
+      color: var(--blue);
+      padding: 7px 20px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.3s;
+      clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    }
+
+    .lang-toggle:hover { background: rgba(26,155,219,0.2); border-color: var(--blue); }
 
     .nav-cta {
       background: transparent;
       border: 1.5px solid var(--blue);
       color: var(--blue);
       padding: 10px 24px;
-      font-family: 'Exo 2', sans-serif;
-      font-size: 0.8rem;
+      font-family: 'Cairo', sans-serif;
+      font-size: 0.88rem;
       font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
       cursor: pointer;
       transition: all 0.3s;
       clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
     }
 
-    .nav-cta:hover {
-      background: var(--blue);
-      color: #fff;
-      box-shadow: 0 0 24px var(--glow);
-    }
+    body.en .nav-cta { font-family: 'Exo 2', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+    .nav-cta:hover { background: var(--blue); color: #fff; box-shadow: 0 0 24px var(--glow); }
 
     /* ── HERO ── */
     .hero {
@@ -137,539 +121,312 @@
     }
 
     .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 70% 70% at 75% 50%, rgba(10,42,74,0.8) 0%, transparent 70%),
-                  radial-gradient(ellipse 40% 60% at 80% 50%, rgba(26,155,219,0.12) 0%, transparent 60%);
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 25% 50%, rgba(10,42,74,0.8) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 60% at 20% 50%, rgba(26,155,219,0.12) 0%, transparent 60%);
       z-index: 1;
     }
 
-    /* Orbiting rings */
+    body.en .hero-bg {
+      background: radial-gradient(ellipse 70% 70% at 75% 50%, rgba(10,42,74,0.8) 0%, transparent 70%),
+                  radial-gradient(ellipse 40% 60% at 80% 50%, rgba(26,155,219,0.12) 0%, transparent 60%);
+    }
+
     .hero-orb {
       position: absolute;
-      right: 8%;
-      top: 50%;
+      left: 8%; top: 50%;
       transform: translateY(-50%);
       width: 520px; height: 520px;
       z-index: 2;
     }
 
-    .orb-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(26,155,219,0.25);
-    }
+    body.en .hero-orb { left: auto; right: 8%; }
 
-    .orb-ring:nth-child(1) {
-      inset: 0;
-      animation: spin 20s linear infinite;
-    }
-
-    .orb-ring:nth-child(2) {
-      inset: 40px;
-      border-color: rgba(26,155,219,0.15);
-      animation: spin 30s linear infinite reverse;
-    }
-
-    .orb-ring:nth-child(3) {
-      inset: 80px;
-      border-color: rgba(245,166,35,0.2);
-      animation: spin 15s linear infinite;
-    }
+    .orb-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(26,155,219,0.25); }
+    .orb-ring:nth-child(1) { inset: 0; animation: spin 20s linear infinite; }
+    .orb-ring:nth-child(2) { inset: 40px; border-color: rgba(26,155,219,0.15); animation: spin 30s linear infinite reverse; }
+    .orb-ring:nth-child(3) { inset: 80px; border-color: rgba(245,166,35,0.2); animation: spin 15s linear infinite; }
 
     .orb-ring::after {
-      content: '';
-      position: absolute;
+      content: ''; position: absolute;
       top: -4px; left: 50%;
       width: 8px; height: 8px;
-      background: var(--blue);
-      border-radius: 50%;
+      background: var(--blue); border-radius: 50%;
       box-shadow: 0 0 16px var(--blue);
       transform: translateX(-50%);
     }
 
-    .orb-ring:nth-child(3)::after {
-      background: var(--gold);
-      box-shadow: 0 0 16px var(--gold);
-    }
+    .orb-ring:nth-child(3)::after { background: var(--gold); box-shadow: 0 0 16px var(--gold); }
 
     .orb-globe {
-      position: absolute;
-      inset: 120px;
-      border-radius: 50%;
+      position: absolute; inset: 120px; border-radius: 50%;
       background: radial-gradient(circle at 40% 40%, rgba(26,155,219,0.3), rgba(5,14,26,0.9));
       border: 1px solid rgba(26,155,219,0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       box-shadow: 0 0 60px rgba(26,155,219,0.2), inset 0 0 40px rgba(26,155,219,0.1);
     }
 
-    .orb-globe::before {
-      content: '🌐';
-      font-size: 4rem;
-      filter: hue-rotate(180deg) brightness(1.5);
-    }
+    .orb-globe::before { content: '🌐'; font-size: 4rem; filter: hue-rotate(180deg) brightness(1.5); }
 
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
     .hero-content {
-      position: relative;
-      z-index: 3;
-      max-width: 580px;
+      position: relative; z-index: 3;
+      max-width: 600px;
+      margin-right: 0; margin-left: auto;
     }
 
+    body.en .hero-content { margin-left: 0; margin-right: auto; }
+
     .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      display: inline-flex; align-items: center; gap: 10px;
       background: rgba(26,155,219,0.1);
       border: 1px solid rgba(26,155,219,0.3);
       padding: 6px 16px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
+      font-size: 0.85rem; font-weight: 700; color: var(--blue);
       margin-bottom: 28px;
       clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
     }
 
+    body.en .hero-tag { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; }
+
     .hero-tag::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--blue);
-      border-radius: 50%;
+      content: ''; width: 6px; height: 6px;
+      background: var(--blue); border-radius: 50%;
       animation: pulse 2s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%,100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.4); }
-    }
+    @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(1.4); } }
 
-    .hero h1 {
-      font-size: clamp(2.4rem, 4vw, 3.8rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 12px;
-      letter-spacing: -1px;
-    }
-
+    .hero h1 { font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 800; line-height: 1.25; margin-bottom: 20px; }
+    body.en .hero h1 { line-height: 1.1; letter-spacing: -1px; }
     .hero h1 .accent { color: var(--blue); }
     .hero h1 .gold { color: var(--gold); }
 
-    .hero-arabic {
-      font-family: 'Cairo', sans-serif;
-      font-size: 1.05rem;
-      color: var(--text-dim);
-      margin-bottom: 28px;
-      line-height: 1.8;
-      direction: rtl;
-    }
-
-    .hero p {
-      font-size: 1rem;
-      color: var(--text-dim);
-      line-height: 1.8;
-      margin-bottom: 44px;
-      font-weight: 300;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    .hero p.sub { font-size: 1rem; color: var(--text-dim); line-height: 1.9; margin-bottom: 44px; font-weight: 300; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 
     .btn-primary {
-      background: var(--blue);
-      color: #fff;
-      padding: 14px 36px;
-      border: none;
-      font-family: 'Exo 2', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      background: var(--blue); color: #fff;
+      padding: 14px 36px; border: none;
+      font-family: 'Cairo', sans-serif; font-size: 0.95rem; font-weight: 700;
       cursor: pointer;
       clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
       transition: all 0.3s;
       box-shadow: 0 0 30px rgba(26,155,219,0.4);
     }
 
-    .btn-primary:hover {
-      background: var(--blue-dark);
-      box-shadow: 0 0 50px rgba(26,155,219,0.7);
-      transform: translateY(-2px);
-    }
+    body.en .btn-primary { font-family: 'Exo 2', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+    .btn-primary:hover { background: var(--blue-dark); box-shadow: 0 0 50px rgba(26,155,219,0.7); transform: translateY(-2px); }
 
     .btn-secondary {
-      background: transparent;
-      color: var(--text);
+      background: transparent; color: var(--text);
       padding: 14px 36px;
       border: 1px solid rgba(255,255,255,0.2);
-      font-family: 'Exo 2', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      font-family: 'Cairo', sans-serif; font-size: 0.95rem; font-weight: 600;
       cursor: pointer;
       clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
       transition: all 0.3s;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-    }
+    body.en .btn-secondary { font-family: 'Exo 2', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
 
-    /* ── STATS BAR ── */
+    /* ── STATS ── */
     .stats {
-      position: relative;
-      z-index: 3;
+      position: relative; z-index: 3;
       background: rgba(8,21,37,0.8);
       border-top: 1px solid rgba(26,155,219,0.15);
       border-bottom: 1px solid rgba(26,155,219,0.15);
       padding: 40px 60px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
+      display: grid; grid-template-columns: repeat(4, 1fr);
     }
 
-    .stat-item {
-      text-align: center;
-      padding: 0 20px;
-      border-right: 1px solid rgba(26,155,219,0.15);
-    }
+    .stat-item { text-align: center; padding: 0 20px; border-left: 1px solid rgba(26,155,219,0.15); }
+    .stat-item:last-child { border-left: none; }
+    body.en .stat-item { border-left: none; border-right: 1px solid rgba(26,155,219,0.15); }
+    body.en .stat-item:last-child { border-right: none; }
 
-    .stat-item:last-child { border-right: none; }
-
-    .stat-number {
-      font-size: 2.6rem;
-      font-weight: 800;
-      color: var(--blue);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
+    .stat-number { font-size: 2.6rem; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 6px; font-family: 'Exo 2', sans-serif; }
     .stat-number span { color: var(--gold); }
+    .stat-label { font-size: 0.85rem; font-weight: 600; color: var(--text-dim); }
+    body.en .stat-label { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; }
 
-    .stat-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
+    /* ── SECTIONS ── */
+    section { position: relative; z-index: 3; padding: 100px 60px; }
 
-    /* ── SECTIONS COMMON ── */
-    section {
-      position: relative;
-      z-index: 3;
-      padding: 100px 60px;
-    }
+    .section-tag { font-size: 0.8rem; font-weight: 700; color: var(--gold); margin-bottom: 14px; }
+    body.en .section-tag { font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; }
 
-    .section-tag {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 14px;
-    }
-
-    .section-title {
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 16px;
-    }
-
+    .section-title { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+    body.en .section-title { line-height: 1.15; }
     .section-title .accent { color: var(--blue); }
-
-    .section-desc {
-      font-size: 0.95rem;
-      color: var(--text-dim);
-      line-height: 1.8;
-      max-width: 540px;
-      font-weight: 300;
-    }
+    .section-desc { font-size: 0.95rem; color: var(--text-dim); line-height: 1.9; max-width: 560px; font-weight: 300; }
 
     /* ── SERVICES ── */
-    .services {
-      background: var(--bg2);
-    }
-
-    .services-header {
-      max-width: 600px;
-      margin-bottom: 60px;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
+    .services { background: var(--bg2); }
+    .services-header { max-width: 620px; margin-bottom: 60px; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
 
     .service-card {
       background: rgba(8,21,37,0.9);
       border: 1px solid rgba(26,155,219,0.1);
       padding: 40px 36px;
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
       transition: all 0.4s;
-      cursor: default;
     }
 
     .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, transparent, var(--blue), transparent);
-      opacity: 0;
-      transition: opacity 0.4s;
+      opacity: 0; transition: opacity 0.4s;
     }
 
     .service-card:hover::before { opacity: 1; }
-
-    .service-card:hover {
-      background: rgba(26,155,219,0.05);
-      border-color: rgba(26,155,219,0.3);
-      transform: translateY(-4px);
-    }
+    .service-card:hover { background: rgba(26,155,219,0.05); border-color: rgba(26,155,219,0.3); transform: translateY(-4px); }
 
     .service-icon {
       width: 56px; height: 56px;
-      background: rgba(26,155,219,0.1);
-      border: 1px solid rgba(26,155,219,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 24px;
+      background: rgba(26,155,219,0.1); border: 1px solid rgba(26,155,219,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 24px;
       clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
       transition: all 0.4s;
     }
 
-    .service-card:hover .service-icon {
-      background: rgba(26,155,219,0.2);
-      box-shadow: 0 0 20px var(--glow);
-    }
-
-    .service-card h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
-    }
-
-    .service-card p {
-      font-size: 0.85rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-      font-weight: 300;
-    }
+    .service-card:hover .service-icon { background: rgba(26,155,219,0.2); box-shadow: 0 0 20px var(--glow); }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 12px; }
+    .service-card p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.8; font-weight: 300; }
 
     .service-num {
-      position: absolute;
-      bottom: 20px; right: 24px;
-      font-size: 4rem;
-      font-weight: 900;
-      color: rgba(26,155,219,0.05);
-      line-height: 1;
-      transition: color 0.4s;
+      position: absolute; bottom: 20px; left: 24px;
+      font-size: 4rem; font-weight: 900;
+      color: rgba(26,155,219,0.05); line-height: 1;
+      font-family: 'Exo 2', sans-serif; transition: color 0.4s;
     }
 
+    body.en .service-num { left: auto; right: 24px; }
     .service-card:hover .service-num { color: rgba(26,155,219,0.1); }
 
     /* ── ABOUT ── */
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .about-visual {
-      position: relative;
-    }
+    .about { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 
     .about-box {
-      width: 100%;
-      aspect-ratio: 1;
-      max-width: 440px;
+      width: 100%; aspect-ratio: 1; max-width: 440px;
       background: linear-gradient(135deg, rgba(26,155,219,0.1), rgba(8,21,37,0.9));
       border: 1px solid rgba(26,155,219,0.2);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
     }
 
     .about-box::before {
-      content: '';
-      position: absolute;
-      top: -1px; left: 20%; right: 20%;
-      height: 2px;
+      content: ''; position: absolute;
+      top: -1px; left: 20%; right: 20%; height: 2px;
       background: linear-gradient(90deg, transparent, var(--blue), transparent);
     }
 
-    .about-box-inner {
-      text-align: center;
-      padding: 40px;
-    }
+    .about-box-inner { text-align: center; padding: 40px; }
+    .about-box-inner .big { font-size: 5rem; font-weight: 900; color: var(--blue); line-height: 1; display: block; font-family: 'Exo 2', sans-serif; }
 
-    .about-box-inner .big {
-      font-size: 5rem;
-      font-weight: 900;
-      color: var(--blue);
-      line-height: 1;
-      display: block;
-    }
-
-    .about-box-inner .label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-top: 8px;
-    }
-
-    .about-corner {
-      position: absolute;
-      width: 60px; height: 60px;
-      border-color: var(--gold);
-      border-style: solid;
-      border-width: 0;
-    }
-
+    .about-corner { position: absolute; width: 60px; height: 60px; border-color: var(--gold); border-style: solid; border-width: 0; }
     .about-corner.tl { top: 16px; left: 16px; border-top-width: 2px; border-left-width: 2px; }
     .about-corner.tr { top: 16px; right: 16px; border-top-width: 2px; border-right-width: 2px; }
     .about-corner.bl { bottom: 16px; left: 16px; border-bottom-width: 2px; border-left-width: 2px; }
     .about-corner.br { bottom: 16px; right: 16px; border-bottom-width: 2px; border-right-width: 2px; }
 
-    .about-text .section-desc { margin-bottom: 32px; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+    .about-list li { display: flex; align-items: center; gap: 14px; font-size: 0.9rem; color: var(--text-dim); }
+    .about-list li::before { content: ''; width: 20px; height: 1px; background: var(--gold); flex-shrink: 0; }
 
-    .about-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .about-list li {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 0.9rem;
-      color: var(--text-dim);
-    }
-
-    .about-list li::before {
-      content: '';
-      width: 20px; height: 1px;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-
-    /* ── WHY US ── */
-    .why {
-      background: var(--bg2);
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      margin-top: 60px;
-    }
+    /* ── WHY ── */
+    .why { background: var(--bg2); }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 60px; }
 
     .why-card {
       padding: 32px 28px;
       border: 1px solid rgba(26,155,219,0.12);
       background: rgba(5,14,26,0.6);
-      text-align: center;
-      transition: all 0.3s;
+      text-align: center; transition: all 0.3s;
     }
 
-    .why-card:hover {
-      border-color: rgba(26,155,219,0.4);
-      background: rgba(26,155,219,0.05);
-    }
-
-    .why-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .why-card h4 {
-      font-size: 0.9rem;
-      font-weight: 700;
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
-    }
-
-    .why-card p {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-    }
+    .why-card:hover { border-color: rgba(26,155,219,0.4); background: rgba(26,155,219,0.05); }
+    .why-icon { font-size: 2rem; margin-bottom: 16px; display: block; }
+    .why-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+    .why-card p { font-size: 0.82rem; color: var(--text-dim); line-height: 1.8; }
 
     /* ── CONTACT ── */
-    .contact {
-      text-align: center;
+    .contact { text-align: center; }
+
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 64px; align-items: start;
+      max-width: 1100px; margin: 0 auto;
+      text-align: right;
     }
 
-    .contact .section-title { margin-bottom: 12px; }
-    .contact .section-desc { margin: 0 auto 48px; text-align: center; }
+    body.en .contact-layout { text-align: left; }
 
-    .contact-form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+    .contact-info-block { display: flex; flex-direction: column; gap: 20px; }
+
+    .contact-info-card {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 22px;
+      background: rgba(8,21,37,0.8);
+      border: 1px solid rgba(26,155,219,0.15);
+      transition: border-color 0.3s, background 0.3s;
+      text-decoration: none; color: inherit;
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .contact-info-card:hover { border-color: rgba(26,155,219,0.4); background: rgba(26,155,219,0.06); }
+
+    .ci-icon {
+      width: 42px; height: 42px; min-width: 42px;
+      background: rgba(26,155,219,0.12); border: 1px solid rgba(26,155,219,0.25);
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+      clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
     }
+
+    .ci-text { flex: 1; }
+    .ci-label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; color: var(--blue); margin-bottom: 4px; text-transform: uppercase; font-family: 'Exo 2', sans-serif; }
+    .ci-value { font-size: 0.9rem; color: var(--text); line-height: 1.6; }
+    .ci-value.small { font-size: 0.82rem; color: var(--text-dim); }
+
+    .social-row { display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap; }
+
+    .social-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 9px 16px;
+      background: rgba(8,21,37,0.8); border: 1px solid rgba(26,155,219,0.18);
+      color: var(--text-dim); text-decoration: none;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 1px;
+      transition: all 0.3s;
+      clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+      font-family: 'Exo 2', sans-serif;
+    }
+
+    .social-btn:hover { border-color: var(--blue); color: var(--blue); background: rgba(26,155,219,0.08); }
+    .social-btn svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     .contact-form input,
-    .contact-form textarea,
-    .contact-form select {
-      background: rgba(8,21,37,0.9);
-      border: 1px solid rgba(26,155,219,0.2);
-      color: var(--text);
-      padding: 14px 20px;
-      font-family: 'Exo 2', sans-serif;
-      font-size: 0.85rem;
-      outline: none;
-      transition: border-color 0.3s;
-      width: 100%;
+    .contact-form textarea {
+      background: rgba(8,21,37,0.9); border: 1px solid rgba(26,155,219,0.2);
+      color: var(--text); padding: 14px 20px;
+      font-family: 'Cairo', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color 0.3s; width: 100%;
+      text-align: right;
     }
+
+    body.en .contact-form input,
+    body.en .contact-form textarea { font-family: 'Exo 2', sans-serif; font-size: 0.85rem; text-align: left; }
 
     .contact-form input::placeholder,
-    .contact-form textarea::placeholder {
-      color: rgba(122,173,204,0.5);
-    }
-
+    .contact-form textarea::placeholder { color: rgba(122,173,204,0.5); }
     .contact-form input:focus,
-    .contact-form textarea:focus {
-      border-color: var(--blue);
-      box-shadow: 0 0 12px rgba(26,155,219,0.15);
-    }
-
+    .contact-form textarea:focus { border-color: var(--blue); box-shadow: 0 0 12px rgba(26,155,219,0.15); }
     .contact-form textarea { resize: vertical; min-height: 120px; }
 
     /* ── FOOTER ── */
@@ -679,220 +436,82 @@
       padding: 48px 60px 32px;
     }
 
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 40px;
-    }
-
-    .footer-brand p {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      line-height: 1.7;
-      margin-top: 16px;
-      font-weight: 300;
-    }
-
-    .footer-col h5 {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 20px;
-    }
-
-    .footer-col ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .footer-col ul a {
-      font-size: 0.82rem;
-      color: var(--text-dim);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+    .footer-brand p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.8; margin-top: 16px; font-weight: 300; }
+    .footer-col h5 { font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--blue); margin-bottom: 20px; font-family: 'Exo 2', sans-serif; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { font-size: 0.85rem; color: var(--text-dim); text-decoration: none; transition: color 0.3s; }
     .footer-col ul a:hover { color: var(--text); }
 
     .footer-bottom {
-      border-top: 1px solid rgba(26,155,219,0.1);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      color: rgba(122,173,204,0.5);
+      border-top: 1px solid rgba(26,155,219,0.1); padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.78rem; color: rgba(122,173,204,0.5);
     }
 
-    /* ── LOGO SVG ── */
-    .logo-mark {
-      display: inline-block;
-    }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(26,155,219,0.3), rgba(245,166,35,0.2), transparent); }
 
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(26,155,219,0.3), rgba(245,166,35,0.2), transparent);
-      margin: 0;
-    }
-
-    /* ── CONTACT LAYOUT ── */
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 64px;
-      align-items: start;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .contact-info-block {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .contact-info-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 20px 22px;
-      background: rgba(8,21,37,0.8);
-      border: 1px solid rgba(26,155,219,0.15);
-      transition: border-color 0.3s, background 0.3s;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .contact-info-card:hover {
-      border-color: rgba(26,155,219,0.4);
-      background: rgba(26,155,219,0.06);
-    }
-
-    .ci-icon {
-      width: 42px; height: 42px;
-      min-width: 42px;
-      background: rgba(26,155,219,0.12);
-      border: 1px solid rgba(26,155,219,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
-    }
-
-    .ci-text { flex: 1; }
-
-    .ci-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: 4px;
-    }
-
-    .ci-value {
-      font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.5;
-      font-weight: 400;
-    }
-
-    .ci-value.small { font-size: 0.82rem; color: var(--text-dim); }
-
-    .social-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    .social-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 16px;
-      background: rgba(8,21,37,0.8);
-      border: 1px solid rgba(26,155,219,0.18);
-      color: var(--text-dim);
-      text-decoration: none;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.3s;
-      clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
-    }
-
-    .social-btn:hover {
-      border-color: var(--blue);
-      color: var(--blue);
-      background: rgba(26,155,219,0.08);
-    }
-
-    .social-btn svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
-   <img src="raa_logo.svg" style="width:48px;height:48px;object-fit:contain;" />
-    <div class="nav-logo-text">
-      <span class="brand">RAA</span>
-      <span class="sub">Company</span>
-    </div>
+  <div class="nav-logo" style="direction:ltr;unicode-bidi:isolate;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 559.7 240.79" style="height:44px;width:auto;direction:ltr;">
+      <path style="fill:#008cd9" d="M118.38,0H0v118.38c0,13.08,10.6,23.68,23.68,23.68h25.86c-1.4-3.79-2.14-7.8-2.18-11.84v-47.35c.02-19.61,15.91-35.49,35.51-35.51h47.35c4.04.04,8.05.78,11.84,2.18v-25.86c0-13.08-10.6-23.68-23.68-23.68Z"/>
+      <path style="fill:#008cd9" d="M95,223.01h118.38v-118.38c0-13.08-10.6-23.68-23.68-23.68h-25.86c1.4,3.79,2.14,7.8,2.18,11.84v47.35c-.02,19.61-15.91,35.49-35.51,35.51h-47.35c-4.04-.04-8.05-.78-11.84-2.18v25.86c0,13.08,10.6,23.68,23.68,23.68Z"/>
+      <path style="fill:#febc27" d="M67.63,140.61c-.91-2.19-1.42-4.6-1.42-7.12v-62.47h69.84c3.2,0,6.08,1.35,8.11,3.52-39.44,1.82-71.57,30.02-76.52,66.06Z"/>
+      <path style="fill:#008cd9" d="M147.17,82.14v53.76c0,8.88-7.2,16.08-16.07,16.08h-46.4c-4.26,0-8.2-1.44-11.32-3.87,1.24-36.97,33.74-66.74,73.71-67.27.05.43.08.86.08,1.31Z"/>
+      <text style="fill:#008cd9;font-family:'Segoe UI Variable','Exo 2',Arial,sans-serif;font-weight:700;font-size:146.01px" transform="translate(244.13 156.54)" direction="ltr"><tspan x="0" y="0">RAA</tspan></text>
+      <text style="fill:#008cd9;font-family:'Segoe UI Variable','Exo 2',Arial,sans-serif;font-weight:700;font-size:58.83px" transform="translate(257.25 222.95)" direction="ltr"><tspan x="0" y="0">COMPANY</tspan></text>
+    </svg>
   </div>
+
   <ul class="nav-links">
-    <li><a href="#services">Services</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#why">Why Us</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#services"><span data-ar>خدماتنا</span><span data-en>Services</span></a></li>
+    <li><a href="#about"><span data-ar>من نحن</span><span data-en>About</span></a></li>
+    <li><a href="#why"><span data-ar>لماذا RAA</span><span data-en>Why Us</span></a></li>
+    <li><a href="#contact"><span data-ar>تواصل معنا</span><span data-en>Contact</span></a></li>
   </ul>
-  <button class="nav-cta">Get In Touch</button>
+
+  <div class="nav-right">
+    <button class="lang-toggle" onclick="toggleLang()">
+      <span data-ar>EN</span><span data-en>ع</span>
+    </button>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <span data-ar>تواصل معنا</span><span data-en>Get In Touch</span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
-
   <div class="hero-orb">
     <div class="orb-ring"></div>
     <div class="orb-ring"></div>
     <div class="orb-ring"></div>
     <div class="orb-globe"></div>
   </div>
-
   <div class="hero-content">
-    <div class="hero-tag">Roaya Al-Taqa Al-Alamiya</div>
-    <h1>
-      An Integrated<br/>
-      <span class="accent">Ecosystem</span> of<br/>
-      Engineering <span class="gold">&</span> Trade
-    </h1>
-    <p class="hero-arabic">رؤية الطاقة العالمية.. منظومة متكاملة من<br/>الحلول الهندسية والتجارية والخدمات المعرفية</p>
-    <p>Delivering world-class engineering solutions, commercial expertise, and knowledge services — powering industries across the globe.</p>
+    <div class="hero-tag">
+      <span data-ar>رؤية الطاقة العالمية</span>
+      <span data-en>Roaya Al-Taqa Al-Alamiya</span>
+    </div>
+    <h1 data-ar>منظومة متكاملة من<br/><span class="accent">الحلول الهندسية</span><br/>والتجارية <span class="gold">والمعرفية</span></h1>
+    <h1 data-en>An Integrated<br/><span class="accent">Ecosystem</span> of<br/>Engineering <span class="gold">&amp;</span> Trade</h1>
+    <p class="sub" data-ar>نقدم حلولاً هندسية عالمية المستوى، وخبرة تجارية متميزة، وخدمات معرفية متكاملة — لنكون شريككم في بناء مستقبل الطاقة.</p>
+    <p class="sub" data-en>Delivering world-class engineering solutions, commercial expertise, and knowledge services — powering industries across the globe.</p>
     <div class="hero-actions">
-      <button class="btn-primary">Explore Services</button>
-      <button class="btn-secondary">Learn More</button>
+      <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+        <span data-ar>استكشف خدماتنا</span><span data-en>Explore Services</span>
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
+        <span data-ar>اعرف أكثر</span><span data-en>Learn More</span>
+      </button>
     </div>
   </div>
 </section>
@@ -901,19 +520,19 @@
 <div class="stats">
   <div class="stat-item reveal">
     <div class="stat-number">15<span>+</span></div>
-    <div class="stat-label">Years of Excellence</div>
+    <div class="stat-label"><span data-ar>سنوات من التميز</span><span data-en>Years of Excellence</span></div>
   </div>
   <div class="stat-item reveal">
     <div class="stat-number">200<span>+</span></div>
-    <div class="stat-label">Projects Delivered</div>
+    <div class="stat-label"><span data-ar>مشروع منجز</span><span data-en>Projects Delivered</span></div>
   </div>
   <div class="stat-item reveal">
     <div class="stat-number">30<span>+</span></div>
-    <div class="stat-label">Global Partners</div>
+    <div class="stat-label"><span data-ar>شريك عالمي</span><span data-en>Global Partners</span></div>
   </div>
   <div class="stat-item reveal">
     <div class="stat-number">12<span>+</span></div>
-    <div class="stat-label">Countries Served</div>
+    <div class="stat-label"><span data-ar>دولة نخدمها</span><span data-en>Countries Served</span></div>
   </div>
 </div>
 
@@ -922,45 +541,55 @@
 <!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-header reveal">
-    <div class="section-tag">What We Do</div>
-    <h2 class="section-title">Core <span class="accent">Service</span> Pillars</h2>
-    <p class="section-desc">A comprehensive suite of integrated solutions spanning engineering, trading, and knowledge domains — built for the demands of today's global energy landscape.</p>
+    <div class="section-tag"><span data-ar>ما نقدمه</span><span data-en>What We Do</span></div>
+    <h2 class="section-title">
+      <span data-ar>ركائز <span class="accent">خدماتنا</span> الأساسية</span>
+      <span data-en>Core <span class="accent">Service</span> Pillars</span>
+    </h2>
+    <p class="section-desc" data-ar>مجموعة متكاملة من الحلول الشاملة التي تمتد عبر قطاعات الهندسة والتجارة والمعرفة — مصممة لتلبية متطلبات قطاع الطاقة العالمي.</p>
+    <p class="section-desc" data-en>A comprehensive suite of integrated solutions spanning engineering, trading, and knowledge domains — built for the demands of today's global energy landscape.</p>
   </div>
   <div class="services-grid">
     <div class="service-card reveal">
       <div class="service-icon">⚙️</div>
-      <h3>Engineering Solutions</h3>
-      <p>Advanced technical consulting and engineering services tailored to complex industrial and energy-sector challenges.</p>
+      <h3><span data-ar>الحلول الهندسية</span><span data-en>Engineering Solutions</span></h3>
+      <p data-ar>استشارات فنية متقدمة وخدمات هندسية مصممة لمواجهة تحديات القطاع الصناعي وقطاع الطاقة.</p>
+      <p data-en>Advanced technical consulting and engineering services tailored to complex industrial and energy-sector challenges.</p>
       <div class="service-num">01</div>
     </div>
     <div class="service-card reveal">
       <div class="service-icon">📦</div>
-      <h3>Trading & Procurement</h3>
-      <p>Reliable supply chain management, equipment sourcing, and commercial trading across international markets.</p>
+      <h3><span data-ar>التجارة والمشتريات</span><span data-en>Trading &amp; Procurement</span></h3>
+      <p data-ar>إدارة موثوقة لسلاسل التوريد وتوفير المعدات والتجارة التجارية عبر الأسواق الدولية.</p>
+      <p data-en>Reliable supply chain management, equipment sourcing, and commercial trading across international markets.</p>
       <div class="service-num">02</div>
     </div>
     <div class="service-card reveal">
       <div class="service-icon">🧠</div>
-      <h3>Knowledge Services</h3>
-      <p>Strategic advisory, training programs, and knowledge transfer solutions that build lasting institutional capacity.</p>
+      <h3><span data-ar>الخدمات المعرفية</span><span data-en>Knowledge Services</span></h3>
+      <p data-ar>استشارات استراتيجية وبرامج تدريبية وحلول نقل المعرفة لبناء قدرات مؤسسية راسخة.</p>
+      <p data-en>Strategic advisory, training programs, and knowledge transfer solutions that build lasting institutional capacity.</p>
       <div class="service-num">03</div>
     </div>
     <div class="service-card reveal">
       <div class="service-icon">🔌</div>
-      <h3>Energy Infrastructure</h3>
-      <p>End-to-end project support for power generation, distribution, and smart energy infrastructure development.</p>
+      <h3><span data-ar>البنية التحتية للطاقة</span><span data-en>Energy Infrastructure</span></h3>
+      <p data-ar>دعم شامل لمشاريع توليد الكهرباء والتوزيع وتطوير البنية التحتية للطاقة الذكية.</p>
+      <p data-en>End-to-end project support for power generation, distribution, and smart energy infrastructure development.</p>
       <div class="service-num">04</div>
     </div>
     <div class="service-card reveal">
       <div class="service-icon">🌐</div>
-      <h3>Global Partnerships</h3>
-      <p>Facilitating strategic alliances and joint ventures between regional operators and international technology leaders.</p>
+      <h3><span data-ar>الشراكات العالمية</span><span data-en>Global Partnerships</span></h3>
+      <p data-ar>تيسير التحالفات الاستراتيجية والمشاريع المشتركة بين المشغلين الإقليميين وقادة التقنية الدولية.</p>
+      <p data-en>Facilitating strategic alliances and joint ventures between regional operators and international technology leaders.</p>
       <div class="service-num">05</div>
     </div>
     <div class="service-card reveal">
       <div class="service-icon">📊</div>
-      <h3>Technical Consulting</h3>
-      <p>Expert analysis, feasibility studies, and data-driven recommendations to guide high-stakes investment decisions.</p>
+      <h3><span data-ar>الاستشارات التقنية</span><span data-en>Technical Consulting</span></h3>
+      <p data-ar>تحليل متخصص ودراسات جدوى وتوصيات مستندة إلى البيانات لدعم القرارات الاستثمارية الكبرى.</p>
+      <p data-en>Expert analysis, feasibility studies, and data-driven recommendations to guide high-stakes investment decisions.</p>
       <div class="service-num">06</div>
     </div>
   </div>
@@ -979,22 +608,26 @@
         <div class="about-corner br"></div>
         <div class="about-box-inner">
           <span class="big">RAA</span>
-          <p style="font-size:0.75rem;letter-spacing:2px;color:var(--text-dim);margin-top:10px;text-transform:uppercase;">Roaya Al-Taqa Al-Alamiya</p>
+          <p style="font-size:0.72rem;letter-spacing:2px;color:var(--text-dim);margin-top:10px;text-transform:uppercase;font-family:'Exo 2',sans-serif;">Roaya Al-Taqa Al-Alamiya</p>
           <div style="width:40px;height:1px;background:var(--gold);margin:20px auto;"></div>
-          <p style="font-family:'Cairo',sans-serif;color:var(--text-dim);font-size:0.9rem;line-height:1.8;direction:rtl;">رؤية الطاقة العالمية</p>
+          <p style="color:var(--text-dim);font-size:0.95rem;line-height:1.8;">رؤية الطاقة العالمية</p>
         </div>
       </div>
     </div>
     <div class="about-text reveal">
-      <div class="section-tag">Who We Are</div>
-      <h2 class="section-title">Built on <span class="accent">Vision</span>,<br/>Driven by Precision</h2>
-      <p class="section-desc">RAA Company is a premier integrated services provider at the forefront of the energy and industrial sectors. We unite engineering expertise, commercial intelligence, and knowledge innovation into a single, cohesive ecosystem.</p>
+      <div class="section-tag"><span data-ar>من نحن</span><span data-en>Who We Are</span></div>
+      <h2 class="section-title">
+        <span data-ar>نبني على <span class="accent">رؤية</span>،<br/>ونعمل بدقة عالية</span>
+        <span data-en>Built on <span class="accent">Vision</span>,<br/>Driven by Precision</span>
+      </h2>
+      <p class="section-desc" data-ar>شركة RAA هي مزود خدمات متكامل رائد في طليعة قطاعي الطاقة والصناعة. نجمع الخبرة الهندسية والذكاء التجاري وابتكار المعرفة في منظومة واحدة متماسكة.</p>
+      <p class="section-desc" data-en>RAA Company is a premier integrated services provider at the forefront of the energy and industrial sectors. We unite engineering expertise, commercial intelligence, and knowledge innovation into a single, cohesive ecosystem.</p>
       <ul class="about-list">
-        <li>Integrated ecosystem approach to complex challenges</li>
-        <li>Deep regional expertise with global reach</li>
-        <li>Commitment to sustainable energy solutions</li>
-        <li>Trusted by leading national and multinational operators</li>
-        <li>End-to-end project ownership and accountability</li>
+        <li><span data-ar>نهج منظومي متكامل لمواجهة التحديات المعقدة</span><span data-en>Integrated ecosystem approach to complex challenges</span></li>
+        <li><span data-ar>خبرة إقليمية عميقة مع امتداد عالمي</span><span data-en>Deep regional expertise with global reach</span></li>
+        <li><span data-ar>التزام راسخ بحلول الطاقة المستدامة</span><span data-en>Commitment to sustainable energy solutions</span></li>
+        <li><span data-ar>موثوق به من كبرى الشركات الوطنية والدولية</span><span data-en>Trusted by leading national and multinational operators</span></li>
+        <li><span data-ar>ملكية كاملة للمشروع من البداية حتى التسليم</span><span data-en>End-to-end project ownership and accountability</span></li>
       </ul>
     </div>
   </div>
@@ -1005,30 +638,38 @@
 <!-- WHY US -->
 <section class="why" id="why">
   <div style="text-align:center;" class="reveal">
-    <div class="section-tag">Our Advantage</div>
-    <h2 class="section-title">Why Choose <span class="accent">RAA</span></h2>
-    <p class="section-desc" style="margin:0 auto;">We don't just deliver services — we build lasting partnerships grounded in trust, technical excellence, and a shared vision for progress.</p>
+    <div class="section-tag"><span data-ar>ميزتنا التنافسية</span><span data-en>Our Advantage</span></div>
+    <h2 class="section-title">
+      <span data-ar>لماذا تختار <span class="accent">RAA</span>؟</span>
+      <span data-en>Why Choose <span class="accent">RAA</span></span>
+    </h2>
+    <p class="section-desc" style="margin:0 auto;" data-ar>لا نقدم خدمات فحسب — بل نبني شراكات دائمة قائمة على الثقة والتميز التقني ورؤية مشتركة للتقدم.</p>
+    <p class="section-desc" style="margin:0 auto;" data-en>We don't just deliver services — we build lasting partnerships grounded in trust, technical excellence, and a shared vision for progress.</p>
   </div>
   <div class="why-grid">
     <div class="why-card reveal">
       <span class="why-icon">🏆</span>
-      <h4>Proven Track Record</h4>
-      <p>Decades of successful project delivery across diverse industries and geographies.</p>
+      <h4><span data-ar>سجل حافل بالإنجازات</span><span data-en>Proven Track Record</span></h4>
+      <p data-ar>عقود من التسليم الناجح للمشاريع عبر صناعات وجغرافيات متنوعة.</p>
+      <p data-en>Decades of successful project delivery across diverse industries and geographies.</p>
     </div>
     <div class="why-card reveal">
       <span class="why-icon">🔬</span>
-      <h4>Technical Depth</h4>
-      <p>A team of seasoned engineers and specialists with domain-specific expertise.</p>
+      <h4><span data-ar>عمق تقني متخصص</span><span data-en>Technical Depth</span></h4>
+      <p data-ar>فريق من المهندسين والمتخصصين ذوي الخبرة العميقة في مجالاتهم.</p>
+      <p data-en>A team of seasoned engineers and specialists with domain-specific expertise.</p>
     </div>
     <div class="why-card reveal">
       <span class="why-icon">🤝</span>
-      <h4>Trusted Networks</h4>
-      <p>Strategic relationships with leading global manufacturers and technology providers.</p>
+      <h4><span data-ar>شبكة علاقات موثوقة</span><span data-en>Trusted Networks</span></h4>
+      <p data-ar>علاقات استراتيجية مع كبار المصنّعين العالميين ومزودي التقنية.</p>
+      <p data-en>Strategic relationships with leading global manufacturers and technology providers.</p>
     </div>
     <div class="why-card reveal">
       <span class="why-icon">⚡</span>
-      <h4>Agile Execution</h4>
-      <p>Flexible, responsive delivery models that adapt to project needs and timelines.</p>
+      <h4><span data-ar>تنفيذ رشيق وسريع</span><span data-en>Agile Execution</span></h4>
+      <p data-ar>نماذج تسليم مرنة واستجابية تتكيف مع احتياجات المشروع والجداول الزمنية.</p>
+      <p data-en>Flexible, responsive delivery models that adapt to project needs and timelines.</p>
     </div>
   </div>
 </section>
@@ -1038,71 +679,70 @@
 <!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="reveal" style="text-align:center;margin-bottom:52px;">
-    <div class="section-tag">Get In Touch</div>
-    <h2 class="section-title">Let's Build <span class="accent">Together</span></h2>
-    <p class="section-desc" style="margin:0 auto;">Ready to explore how RAA can support your next project? Reach out — we're always available.</p>
+    <div class="section-tag"><span data-ar>تواصل معنا</span><span data-en>Get In Touch</span></div>
+    <h2 class="section-title">
+      <span data-ar>لنبني <span class="accent">معاً</span></span>
+      <span data-en>Let's Build <span class="accent">Together</span></span>
+    </h2>
+    <p class="section-desc" style="margin:0 auto;" data-ar>هل أنت مستعد لاستكشاف كيف يمكن لـ RAA دعم مشروعك القادم؟ تواصل معنا وسيستجيب فريقنا بسرعة.</p>
+    <p class="section-desc" style="margin:0 auto;" data-en>Ready to explore how RAA can support your next project? Reach out — we're always available.</p>
   </div>
 
   <div class="contact-layout">
-
-    <!-- LEFT: contact details -->
     <div class="contact-info-block reveal">
-
       <a href="https://maps.google.com/?q=609-14+Ramadan+St,+Baghdad,+Iraq" target="_blank" class="contact-info-card">
         <div class="ci-icon">📍</div>
         <div class="ci-text">
-          <div class="ci-label">Address</div>
-          <div class="ci-value">609-14 Ramadan St<br/>Baghdad, Iraq</div>
+          <div class="ci-label"><span data-ar>العنوان</span><span data-en>Address</span></div>
+          <div class="ci-value" data-ar>شارع رمضان 609-14<br/>بغداد، العراق</div>
+          <div class="ci-value" data-en>609-14 Ramadan St<br/>Baghdad, Iraq</div>
         </div>
       </a>
-
       <a href="tel:+9647890002025" class="contact-info-card">
         <div class="ci-icon">📞</div>
         <div class="ci-text">
-          <div class="ci-label">Phone / WhatsApp</div>
+          <div class="ci-label"><span data-ar>هاتف / واتساب</span><span data-en>Phone / WhatsApp</span></div>
           <div class="ci-value">+964 789 000 2025</div>
-          <div class="ci-value small">Available on WhatsApp</div>
+          <div class="ci-value small"><span data-ar>متوفر على واتساب</span><span data-en>Available on WhatsApp</span></div>
         </div>
       </a>
-
       <div class="contact-info-card" style="flex-direction:column;gap:14px;">
         <div style="display:flex;align-items:center;gap:10px;">
           <div class="ci-icon">🌐</div>
           <div class="ci-text">
-            <div class="ci-label">Follow Us</div>
-            <div class="ci-value small">Stay connected on social media</div>
+            <div class="ci-label"><span data-ar>تابعنا</span><span data-en>Follow Us</span></div>
+            <div class="ci-value small"><span data-ar>ابق على تواصل معنا عبر وسائل التواصل</span><span data-en>Stay connected on social media</span></div>
           </div>
         </div>
         <div class="social-row">
           <a href="https://www.linkedin.com/company/raa-iraq" target="_blank" class="social-btn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
           <a href="https://www.instagram.com/raa.iraq" target="_blank" class="social-btn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
             Instagram
           </a>
           <a href="https://www.facebook.com/RAA.Iraq" target="_blank" class="social-btn">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             Facebook
           </a>
         </div>
       </div>
-
     </div>
 
-    <!-- RIGHT: form -->
     <div class="contact-form reveal">
       <div class="form-row">
-        <input type="text" placeholder="Full Name" />
-        <input type="email" placeholder="Email Address" />
+        <input type="text" id="inp-name" />
+        <input type="email" id="inp-email" />
       </div>
-      <input type="text" placeholder="Company / Organization" />
-      <input type="text" placeholder="Subject" />
-      <textarea placeholder="Tell us about your project or inquiry..."></textarea>
-      <button class="btn-primary" style="align-self:flex-start;padding:16px 48px;">Send Message</button>
+      <input type="text" id="inp-company" />
+      <input type="text" id="inp-subject" />
+      <textarea id="inp-msg" style="resize:vertical;min-height:120px;"></textarea>
+      <button class="btn-primary" style="align-self:flex-start;padding:16px 48px;">
+        <span data-ar>إرسال الرسالة</span><span data-en>Send Message</span>
+      </button>
     </div>
-
   </div>
 </section>
 
@@ -1110,39 +750,43 @@
 <footer>
   <div class="footer-top">
     <div class="footer-brand">
-      <div class="nav-logo">
-       <img src="raa_logo.svg" style="width:48px;height:48px;object-fit:contain;" />
-        <div class="nav-logo-text">
-          <span class="brand">RAA</span>
-          <span class="sub">Company</span>
-        </div>
+      <div class="nav-logo" style="direction:ltr;unicode-bidi:isolate;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 559.7 240.79" style="height:40px;width:auto;direction:ltr;">
+          <path style="fill:#008cd9" d="M118.38,0H0v118.38c0,13.08,10.6,23.68,23.68,23.68h25.86c-1.4-3.79-2.14-7.8-2.18-11.84v-47.35c.02-19.61,15.91-35.49,35.51-35.51h47.35c4.04.04,8.05.78,11.84,2.18v-25.86c0-13.08-10.6-23.68-23.68-23.68Z"/>
+          <path style="fill:#008cd9" d="M95,223.01h118.38v-118.38c0-13.08-10.6-23.68-23.68-23.68h-25.86c1.4,3.79,2.14,7.8,2.18,11.84v47.35c-.02,19.61-15.91,35.49-35.51,35.51h-47.35c-4.04-.04-8.05-.78-11.84-2.18v25.86c0,13.08,10.6,23.68,23.68,23.68Z"/>
+          <path style="fill:#febc27" d="M67.63,140.61c-.91-2.19-1.42-4.6-1.42-7.12v-62.47h69.84c3.2,0,6.08,1.35,8.11,3.52-39.44,1.82-71.57,30.02-76.52,66.06Z"/>
+          <path style="fill:#008cd9" d="M147.17,82.14v53.76c0,8.88-7.2,16.08-16.07,16.08h-46.4c-4.26,0-8.2-1.44-11.32-3.87,1.24-36.97,33.74-66.74,73.71-67.27.05.43.08.86.08,1.31Z"/>
+          <text style="fill:#008cd9;font-family:'Segoe UI Variable','Exo 2',Arial,sans-serif;font-weight:700;font-size:146.01px" transform="translate(244.13 156.54)" direction="ltr"><tspan x="0" y="0">RAA</tspan></text>
+          <text style="fill:#008cd9;font-family:'Segoe UI Variable','Exo 2',Arial,sans-serif;font-weight:700;font-size:58.83px" transform="translate(257.25 222.95)" direction="ltr"><tspan x="0" y="0">COMPANY</tspan></text>
+        </svg>
       </div>
-      <p>An integrated ecosystem of engineering, trading, and knowledge services — powering the global energy vision forward.</p>
+      <p data-ar>منظومة متكاملة من الحلول الهندسية والتجارية وخدمات المعرفة — ندفع رؤية الطاقة العالمية إلى الأمام.</p>
+      <p data-en>An integrated ecosystem of engineering, trading, and knowledge services — powering the global energy vision forward.</p>
     </div>
     <div class="footer-col">
-      <h5>Services</h5>
+      <h5><span data-ar>الخدمات</span><span data-en>Services</span></h5>
       <ul>
-        <li><a href="#">Engineering</a></li>
-        <li><a href="#">Trading</a></li>
-        <li><a href="#">Knowledge</a></li>
-        <li><a href="#">Consulting</a></li>
+        <li><a href="#"><span data-ar>الهندسة</span><span data-en>Engineering</span></a></li>
+        <li><a href="#"><span data-ar>التجارة</span><span data-en>Trading</span></a></li>
+        <li><a href="#"><span data-ar>المعرفة</span><span data-en>Knowledge</span></a></li>
+        <li><a href="#"><span data-ar>الاستشارات</span><span data-en>Consulting</span></a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>Company</h5>
+      <h5><span data-ar>الشركة</span><span data-en>Company</span></h5>
       <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Our Team</a></li>
-        <li><a href="#">Projects</a></li>
-        <li><a href="#">Careers</a></li>
+        <li><a href="#"><span data-ar>من نحن</span><span data-en>About Us</span></a></li>
+        <li><a href="#"><span data-ar>فريقنا</span><span data-en>Our Team</span></a></li>
+        <li><a href="#"><span data-ar>مشاريعنا</span><span data-en>Projects</span></a></li>
+        <li><a href="#"><span data-ar>الوظائف</span><span data-en>Careers</span></a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h5>Contact</h5>
+      <h5><span data-ar>تواصل معنا</span><span data-en>Contact</span></h5>
       <ul>
-        <li><a href="https://maps.google.com/?q=609-14+Ramadan+St,+Baghdad,+Iraq" target="_blank">609-14 Ramadan St, Baghdad</a></li>
+        <li><a href="https://maps.google.com/?q=609-14+Ramadan+St,+Baghdad,+Iraq" target="_blank"><span data-ar>شارع رمضان 609-14، بغداد</span><span data-en>609-14 Ramadan St, Baghdad</span></a></li>
         <li><a href="tel:+9647890002025">+964 789 000 2025</a></li>
-        <li><a href="https://wa.me/9647890002025" target="_blank">WhatsApp Us</a></li>
+        <li><a href="https://wa.me/9647890002025" target="_blank"><span data-ar>واتساب</span><span data-en>WhatsApp Us</span></a></li>
         <li><a href="https://www.linkedin.com/company/raa-iraq" target="_blank">LinkedIn</a></li>
         <li><a href="https://www.instagram.com/raa.iraq" target="_blank">@raa.iraq</a></li>
         <li><a href="https://www.facebook.com/RAA.Iraq" target="_blank">Facebook</a></li>
@@ -1150,14 +794,44 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 RAA Company. All rights reserved.</span>
-    <span style="font-family:'Cairo',sans-serif;direction:rtl;">رؤية الطاقة العالمية</span>
+    <span data-ar>© 2026 شركة RAA. جميع الحقوق محفوظة.</span>
+    <span data-en>© 2026 RAA Company. All rights reserved.</span>
+    <span style="font-family:'Cairo',sans-serif;">رؤية الطاقة العالمية</span>
   </div>
 </footer>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
+  // ── PLACEHOLDERS ──
+  const placeholders = {
+    'inp-name':    { ar: 'الاسم الكامل',                       en: 'Full Name' },
+    'inp-email':   { ar: 'البريد الإلكتروني',                   en: 'Email Address' },
+    'inp-company': { ar: 'الشركة / المؤسسة',                    en: 'Company / Organization' },
+    'inp-subject': { ar: 'الموضوع',                             en: 'Subject' },
+    'inp-msg':     { ar: 'أخبرنا عن مشروعك أو استفسارك...',    en: 'Tell us about your project or inquiry...' },
+  };
+
+  function updatePlaceholders() {
+    const lang = document.body.classList.contains('en') ? 'en' : 'ar';
+    Object.entries(placeholders).forEach(([id, p]) => {
+      const el = document.getElementById(id);
+      if (el) el.placeholder = p[lang];
+    });
+  }
+
+  // ── LANGUAGE TOGGLE ──
+  function toggleLang() {
+    const goingEn = !document.body.classList.contains('en');
+    document.body.classList.toggle('en');
+    document.documentElement.lang = goingEn ? 'en' : 'ar';
+    document.documentElement.dir  = goingEn ? 'ltr' : 'rtl';
+    document.title = goingEn ? 'RAA Company' : 'شركة RAA';
+    updatePlaceholders();
+  }
+
+  // Set Arabic placeholders on load
+  updatePlaceholders();
+
+  // ── SCROLL REVEAL ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -1166,12 +840,9 @@
       }
     });
   }, { threshold: 0.1 });
-  reveals.forEach(el => observer.observe(el));
 
-  // Hero immediate reveal
-  document.querySelectorAll('.hero .reveal, .hero-content').forEach(el => {
-    el.classList.add('visible');
-  });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  document.querySelector('.hero-content').classList.add('visible');
 </script>
 </body>
 </html>
